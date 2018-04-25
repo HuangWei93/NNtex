@@ -4,6 +4,7 @@
   centered/.style = { align=center, anchor=center },
      empty/.style = { font=\sffamily\Large, centered, text width=2cm },
        box/.style = { font=\sffamily, fill=green, centered },
+       input/.style = { font=\sffamily, fill=black!20, centered },
     result/.style = { font=\sffamily\scriptsize, fill=black!20, centered},
      arrow/.style = { very thick, color=red, ->, >=Triangle},
 }
@@ -15,20 +16,25 @@
       matrix of nodes,
       column sep      = 3em,
       row sep         = 5ex,
-      column 1/.style = { nodes = { empty }  },
-      column 2/.style = { nodes = { box }    },
-      column 3/.style = { nodes = { result } },
+      row 1/.style = { nodes = { result }  },
+      row 2/.style = { nodes = { box }    },
+      row 3/.style = { nodes = { box } },
+      row 4/.style = { nodes = { input } },
     ]
     {
-      S-R-R  & Determined? & \nothing \\
-      A-R-R  & Influence?  & \nothing \\
-      Value  & Importance? & \nothing \\
-      S-R-R  & Conseqence? & \nothing \\
+      $Y_{t-1}$  & $Y_t$ & $Y_{t+1}$ \\
+      Hiden layer2  & Hiden layer2 & Hiden layer2 \\
+      Hiden layer1  & Hiden layer1 & Hiden layer1 \\
+      $X_{t-1}$  & $X_t$ & $X_{t+1}$ \\
     };
   \foreach \i/\j in {1/2,2/3,3/4} {
-    \draw [arrow] (m-\i-2) -- (m-\j-2);
-    \draw [arrow] (m-\i-2) -- (m-\i-3);
+    \draw [arrow] (m-\j-3) -- (m-\i-3);
+    \draw [arrow] (m-\j-2) -- (m-\i-2);
+    \draw [arrow] (m-\j-1) -- (m-\i-1);
   }
-  \draw [arrow] (m-4-2) -- (m-4-3);
+  \foreach \i/\j in {1/2,2/3} {
+    \draw [arrow] (m-2-\i) -- (m-2-\j);
+    \draw [arrow] (m-3-\i) -- (m-3-\j);
+  }
 \end{tikzpicture}
 \end{document}
